@@ -40,12 +40,12 @@
             <div class="mt-5 flex flex-wrap items-center gap-3">
                 <c:choose>
                     <c:when test="${produit.enPromotion}">
-                        <span class="text-3xl font-black text-white"><fmt:formatNumber value="${produit.prixEffectif}" type="currency" currencySymbol="EUR " /></span>
-                        <span class="text-lg text-slate-500 line-through"><fmt:formatNumber value="${produit.prix}" type="currency" currencySymbol="EUR " /></span>
+                        <span class="text-3xl font-black text-white"><fmt:formatNumber value="${produit.prixEffectif}" type="currency" currencySymbol="MAD " /></span>
+                        <span class="text-lg text-slate-500 line-through"><fmt:formatNumber value="${produit.prix}" type="currency" currencySymbol="MAD " /></span>
                         <span class="rounded-full border border-cyanx/40 bg-cyanx/10 px-3 py-1 text-xs font-black uppercase text-cyanx">Promo active</span>
                     </c:when>
                     <c:otherwise>
-                        <span class="text-3xl font-black text-white"><fmt:formatNumber value="${produit.prix}" type="currency" currencySymbol="EUR " /></span>
+                        <span class="text-3xl font-black text-white"><fmt:formatNumber value="${produit.prix}" type="currency" currencySymbol="MAD " /></span>
                     </c:otherwise>
                 </c:choose>
             </div>
@@ -120,7 +120,7 @@
                         <div class="p-4">
                             <div class="text-xs font-black uppercase text-slate-400">${rp.marque}</div>
                             <h3 class="mt-2 font-black text-white"><a class="hover:text-cyanx" href="${ctx}/produit?id=${rp.id}">${rp.nom}</a></h3>
-                            <div class="mt-3 text-lg font-black text-white"><fmt:formatNumber value="${rp.prixEffectif}" type="currency" currencySymbol="EUR " /></div>
+                            <div class="mt-3 text-lg font-black text-white"><fmt:formatNumber value="${rp.prixEffectif}" type="currency" currencySymbol="MAD " /></div>
                             <a class="mt-4 inline-flex min-h-9 items-center rounded-md border border-line bg-white/10 px-3 text-sm font-bold text-white hover:border-cyanx hover:text-cyanx" href="${ctx}/produit?id=${rp.id}">View details</a>
                         </div>
                     </article>

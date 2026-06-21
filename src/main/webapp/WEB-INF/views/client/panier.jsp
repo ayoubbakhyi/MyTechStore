@@ -44,9 +44,9 @@
                                 <span class="text-xs font-black uppercase text-slate-400">${item.produit.marque}</span>
                                 <h2 class="mt-1 text-lg font-black text-white"><a class="hover:text-cyanx" href="${ctx}/produit?id=${item.produit.id}">${item.produit.nom}</a></h2>
                                 <div class="mt-2 flex flex-wrap items-center gap-2">
-                                    <span class="font-black text-white"><fmt:formatNumber value="${item.produit.prixEffectif}" type="currency" currencySymbol="EUR " /></span>
+                                    <span class="font-black text-white"><fmt:formatNumber value="${item.produit.prixEffectif}" type="currency" currencySymbol="MAD " /></span>
                                     <c:if test="${item.produit.enPromotion}">
-                                        <span class="text-sm text-slate-500 line-through"><fmt:formatNumber value="${item.produit.prix}" type="currency" currencySymbol="EUR " /></span>
+                                        <span class="text-sm text-slate-500 line-through"><fmt:formatNumber value="${item.produit.prix}" type="currency" currencySymbol="MAD " /></span>
                                     </c:if>
                                 </div>
                                 <span class="mt-2 inline-flex items-center gap-2 text-sm text-slate-300">
@@ -62,7 +62,7 @@
                                     <input class="min-h-10 rounded-md border border-line bg-ink/70 px-3 text-white outline-none focus:border-cyanx" type="number" name="quantity" value="${item.quantite}" min="1" max="${item.produit.stock}" aria-label="Quantite pour ${item.produit.nom}">
                                     <button class="min-h-10 rounded-md bg-gradient-to-r from-cyanx to-greenx px-3 text-sm font-black text-ink" type="submit">Update</button>
                                 </form>
-                                <strong class="text-white"><fmt:formatNumber value="${item.produit.prixEffectif * item.quantite}" type="currency" currencySymbol="EUR " /></strong>
+                                <strong class="text-white"><fmt:formatNumber value="${item.produit.prixEffectif * item.quantite}" type="currency" currencySymbol="MAD " /></strong>
                                 <form action="${ctx}/panier" method="post">
                                     <input type="hidden" name="action" value="remove">
                                     <input type="hidden" name="productId" value="${item.produit.id}">
@@ -78,7 +78,7 @@
                     <div class="mt-4 divide-y divide-line">
                         <div class="flex items-center justify-between py-3 text-slate-300"><span>Total articles</span><strong class="text-white">${totalItems}</strong></div>
                         <div class="flex items-center justify-between py-3 text-slate-300"><span>Livraison</span><strong class="text-white">Gratuite</strong></div>
-                        <div class="flex items-center justify-between py-3 text-slate-300"><span>Total TTC</span><strong class="text-2xl font-black text-cyanx"><fmt:formatNumber value="${panier.total}" type="currency" currencySymbol="EUR " /></strong></div>
+                        <div class="flex items-center justify-between py-3 text-slate-300"><span>Total TTC</span><strong class="text-2xl font-black text-cyanx"><fmt:formatNumber value="${panier.total}" type="currency" currencySymbol="MAD " /></strong></div>
                     </div>
 
                     <div class="mt-5 grid gap-3">

@@ -1,119 +1,78 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<jsp:include page="../layout/header.jsp" />
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<jsp:include page="../layout/header.jsp" />
+<jsp:include page="../layout/admin-sidebar.jsp" />
 
-<div class="container-fluid p-0">
-    <div class="row g-0">
-        <!-- Sidebar Column -->
-        <div class="col-md-3 col-lg-2">
-            <jsp:include page="../layout/admin-sidebar.jsp" />
-        </div>
+<main class="mx-auto w-full max-w-[1180px] px-4 pb-12">
+    <section class="mb-6">
+        <span class="inline-flex rounded-full border border-cyanx/40 bg-cyanx/10 px-3 py-1 text-xs font-black uppercase tracking-wide text-cyanx">Livraisons</span>
+        <h1 class="mt-4 text-3xl font-black text-white md:text-5xl">Suivi des livraisons</h1>
+        <p class="mt-2 text-slate-400">Mettez a jour les statuts de preparation, expedition et livraison.</p>
+    </section>
 
-        <!-- Content Column -->
-        <div class="col-md-9 col-lg-10 p-4">
-            <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
-                <div>
-                    <h2 class="fw-bold mb-0">Suivi et Expédition des Livraisons</h2>
-                    <p class="text-muted mb-0">Mettez à jour les statuts de préparation et d'acheminement, et planifiez les dates de livraison</p>
+    <c:if test="${not empty param.success}">
+        <div class="mb-6 rounded-lg border border-greenx/30 bg-greenx/10 px-4 py-3 text-greenx">${param.success}</div>
+    </c:if>
+
+    <section class="rounded-lg border border-line bg-panel/80 p-5">
+        <c:choose>
+            <c:when test="${empty livraisons}">
+                <div class="rounded-lg border border-line bg-ink/50 p-6 text-slate-400">Aucune expedition en cours.</div>
+            </c:when>
+            <c:otherwise>
+                <div class="grid gap-4">
+                    <c:forEach var="liv" items="${livraisons}">
+                        <article class="rounded-lg border border-line bg-white/5 p-4">
+                            <div class="grid gap-4 lg:grid-cols-[120px_1fr_180px_1.3fr] lg:items-start">
+                                <div>
+                                    <span class="text-xs font-black uppercase text-slate-400">Commande</span>
+                                    <strong class="mt-1 block text-white">#CMD-${liv.idCommande}</strong>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-black uppercase text-slate-400">Adresse</span>
+                                    <strong class="mt-1 block text-white">${liv.adresse}</strong>
+                                    <span class="text-sm text-slate-400">${liv.codePostal} ${liv.ville}</span>
+                                </div>
+                                <div>
+                                    <span class="text-xs font-black uppercase text-slate-400">Statut</span>
+                                    <span class="mt-2 inline-flex rounded-full border border-cyanx/30 bg-cyanx/10 px-3 py-1 text-xs font-black text-cyanx">
+                                        ${liv.statut == 'EN_PREPARATION' ? 'En preparation' :
+                                          liv.statut == 'EXPEDIEE' ? 'Expediee' : 'Livree'}
+                                    </span>
+                                </div>
+                                <div class="grid gap-3">
+                                    <form class="flex flex-wrap gap-2" action="${ctx}/admin/livraisons" method="post">
+                                        <input type="hidden" name="id" value="${liv.id}">
+                                        <select name="statut" class="min-h-10 rounded-md border border-line bg-ink/70 px-3 text-sm text-white outline-none focus:border-cyanx" onchange="this.form.submit()">
+                                            <option value="EN_PREPARATION" ${liv.statut == 'EN_PREPARATION' ? 'selected' : ''}>En preparation</option>
+                                            <option value="EXPEDIEE" ${liv.statut == 'EXPEDIEE' ? 'selected' : ''}>Expediee</option>
+                                            <option value="LIVREE" ${liv.statut == 'LIVREE' ? 'selected' : ''}>Livree</option>
+                                        </select>
+                                    </form>
+
+                                    <form class="grid gap-3 rounded-md border border-line bg-ink/50 p-3 md:grid-cols-[1fr_1fr_auto]" action="${ctx}/admin/livraisons" method="post">
+                                        <input type="hidden" name="id" value="${liv.id}">
+                                        <div>
+                                            <label class="mb-1 block text-xs font-bold uppercase text-slate-400">Date expedition</label>
+                                            <input class="min-h-10 w-full rounded-md border border-line bg-ink/70 px-3 text-sm text-white outline-none focus:border-cyanx" type="date" name="dateExpedition" value="${liv.dateExpedition != null ? liv.dateExpedition : ''}" required>
+                                        </div>
+                                        <div>
+                                            <label class="mb-1 block text-xs font-bold uppercase text-slate-400">Livraison prevue</label>
+                                            <input class="min-h-10 w-full rounded-md border border-line bg-ink/70 px-3 text-sm text-white outline-none focus:border-cyanx" type="date" name="dateLivraisonPrevue" value="${liv.dateLivraisonPrevue != null ? liv.dateLivraisonPrevue : ''}" required>
+                                        </div>
+                                        <div class="flex items-end">
+                                            <button class="min-h-10 w-full rounded-md bg-gradient-to-r from-cyanx to-greenx px-4 text-sm font-black text-ink" type="submit">Valider</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </article>
+                    </c:forEach>
                 </div>
-            </div>
+            </c:otherwise>
+        </c:choose>
+    </section>
+</main>
 
-            <c:if test="${not empty param.success}">
-                <div class="alert alert-success alert-dismissible fade show alert-dismissible-auto" role="alert">
-                    <i class="fa-solid fa-circle-check me-2"></i>${param.success}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            </c:if>
-
-            <div class="card border-0 shadow-sm p-4">
-                <c:choose>
-                    <c:when test="${empty livraisons}">
-                        <p class="text-muted mb-0">Aucune expédition en cours.</p>
-                    </c:when>
-                    <c:otherwise>
-                        <div class="table-responsive">
-                            <table class="table align-middle">
-                                <thead>
-                                    <tr>
-                                        <th scope="col" style="width: 100px;">Commande</th>
-                                        <th scope="col">Destinataire & Adresse</th>
-                                        <th scope="col" class="text-center">Statut Livraison</th>
-                                        <th scope="col" class="text-center">Dates d'expédition & prévue</th>
-                                        <th scope="col" class="text-end" style="width: 380px;">Actions de Suivi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <c:forEach var="liv" items="${livraisons}">
-                                        <tr>
-                                            <td><strong>#CMD-${liv.idCommande}</strong></td>
-                                            <td>
-                                                <div class="fw-semibold">${liv.adresse}</div>
-                                                <small class="text-muted">${liv.codePostal} ${liv.ville}</small>
-                                            </td>
-                                            <td class="text-center">
-                                                <span class="badge badge-${liv.statut.toLowerCase().replace('_', '-')}">
-                                                    ${liv.statut == 'EN_PREPARATION' ? 'En préparation' : 
-                                                      liv.statut == 'EXPEDIEE' ? 'Expédiée' : 'Livrée'}
-                                                </span>
-                                            </td>
-                                            <td class="text-center small">
-                                                <div>Expédition: <strong>${liv.dateExpedition != null ? liv.dateExpedition : '--'}</strong></div>
-                                                <div>Prévue le: <strong>${liv.dateLivraisonPrevue != null ? liv.dateLivraisonPrevue : '--'}</strong></div>
-                                            </td>
-                                            <td class="text-end">
-                                                <div class="d-flex flex-wrap gap-2 justify-content-end">
-                                                    <!-- Update status -->
-                                                    <form action="${pageContext.request.contextPath}/admin/livraisons" method="post" class="d-inline-flex align-items-center m-0">
-                                                        <input type="hidden" name="id" value="${liv.id}">
-                                                        <select name="statut" class="form-select form-select-sm me-2" style="width: 150px;" onchange="this.form.submit()">
-                                                            <option value="EN_PREPARATION" ${liv.statut == 'EN_PREPARATION' ? 'selected' : ''}>En préparation</option>
-                                                            <option value="EXPEDIEE" ${liv.statut == 'EXPEDIEE' ? 'selected' : ''}>Expédiée</option>
-                                                            <option value="LIVREE" ${liv.statut == 'LIVREE' ? 'selected' : ''}>Livrée</option>
-                                                        </select>
-                                                    </form>
-                                                    
-                                                    <!-- Plan dates -->
-                                                    <button class="btn btn-sm btn-outline-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#datesCollapse-${liv.id}" aria-expanded="false">
-                                                        <i class="fa-solid fa-calendar-days me-1"></i>Planifier
-                                                    </button>
-                                                </div>
-                                                
-                                                <!-- Collapse form for planning dates -->
-                                                <div class="collapse mt-2 text-start" id="datesCollapse-${liv.id}">
-                                                    <div class="card card-body p-2 border-secondary-subtle">
-                                                        <form action="${pageContext.request.contextPath}/admin/livraisons" method="post" class="m-0">
-                                                            <input type="hidden" name="id" value="${liv.id}">
-                                                            <div class="row g-2">
-                                                                <div class="col-6">
-                                                                    <label class="form-label small mb-1">Date d'Exp.</label>
-                                                                    <input type="date" name="dateExpedition" class="form-control form-control-sm" value="${liv.dateExpedition != null ? liv.dateExpedition : ''}" required>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <label class="form-label small mb-1">Livraison Prév.</label>
-                                                                    <input type="date" name="dateLivraisonPrevue" class="form-control form-control-sm" value="${liv.dateLivraisonPrevue != null ? liv.dateLivraisonPrevue : ''}" required>
-                                                                </div>
-                                                                <div class="col-12 text-end">
-                                                                    <button type="submit" class="btn btn-primary btn-sm px-3 py-1">Valider</button>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </tbody>
-                            </table>
-                        </div>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap 5.3 JS Bundle CDN -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<jsp:include page="../layout/footer.jsp" />

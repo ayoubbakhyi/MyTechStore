@@ -38,7 +38,7 @@
                             </span>
                         </div>
                         <div class="flex flex-wrap items-center gap-3 md:justify-end">
-                            <strong class="text-2xl font-black text-cyanx"><fmt:formatNumber value="${c.total}" type="currency" currencySymbol="EUR " /></strong>
+                            <strong class="text-2xl font-black text-cyanx"><fmt:formatNumber value="${c.total}" type="currency" currencySymbol="MAD " /></strong>
                             <a class="inline-flex min-h-10 items-center rounded-md border border-line bg-white/10 px-4 text-sm font-bold text-white hover:border-cyanx hover:text-cyanx" href="${ctx}/mes-commandes?id=${c.id}">Details</a>
                         </div>
                     </article>

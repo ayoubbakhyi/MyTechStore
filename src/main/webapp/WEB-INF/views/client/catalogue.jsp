@@ -123,12 +123,12 @@
                                 <div class="mt-4 flex flex-wrap items-center gap-2">
                                     <c:choose>
                                         <c:when test="${p.enPromotion}">
-                                            <span class="text-xl font-black text-white"><fmt:formatNumber value="${p.prixEffectif}" type="currency" currencySymbol="EUR " /></span>
-                                            <span class="text-sm text-slate-500 line-through"><fmt:formatNumber value="${p.prix}" type="currency" currencySymbol="EUR " /></span>
+                                            <span class="text-xl font-black text-white"><fmt:formatNumber value="${p.prixEffectif}" type="currency" currencySymbol="MAD " /></span>
+                                            <span class="text-sm text-slate-500 line-through"><fmt:formatNumber value="${p.prix}" type="currency" currencySymbol="MAD " /></span>
                                             <span class="rounded-full bg-cyanx/10 px-2 py-1 text-xs font-black uppercase text-cyanx">Promo</span>
                                         </c:when>
                                         <c:otherwise>
-                                            <span class="text-xl font-black text-white"><fmt:formatNumber value="${p.prix}" type="currency" currencySymbol="EUR " /></span>
+                                            <span class="text-xl font-black text-white"><fmt:formatNumber value="${p.prix}" type="currency" currencySymbol="MAD " /></span>
                                         </c:otherwise>
                                     </c:choose>
                                 </div>

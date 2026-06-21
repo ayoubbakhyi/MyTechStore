@@ -45,7 +45,7 @@
                             <h3 class="font-black text-white">${line.produit.nom}</h3>
                             <span class="text-sm text-slate-400">Quantity: ${line.quantite}</span>
                         </div>
-                        <strong class="text-white"><fmt:formatNumber value="${line.prixUnitaire * line.quantite}" type="currency" currencySymbol="EUR " /></strong>
+                        <strong class="text-white"><fmt:formatNumber value="${line.prixUnitaire * line.quantite}" type="currency" currencySymbol="MAD " /></strong>
                     </article>
                 </c:forEach>
             </div>
@@ -84,7 +84,7 @@
 
             <div class="mt-5 flex items-center justify-between border-t border-line pt-4 text-slate-300">
                 <span>Total TTC</span>
-                <strong class="text-2xl font-black text-cyanx"><fmt:formatNumber value="${commande.total}" type="currency" currencySymbol="EUR " /></strong>
+                <strong class="text-2xl font-black text-cyanx"><fmt:formatNumber value="${commande.total}" type="currency" currencySymbol="MAD " /></strong>
             </div>
             <a class="mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-md border border-line bg-white/10 px-5 font-bold text-white hover:border-cyanx hover:text-cyanx" href="${ctx}/mes-commandes">Back to orders</a>
         </aside>

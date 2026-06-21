@@ -52,11 +52,11 @@
                 <c:forEach var="item" items="${panier.items}">
                     <div class="flex items-center justify-between gap-4 py-3 text-slate-300">
                         <span>${item.produit.nom} x ${item.quantite}</span>
-                        <strong class="text-white"><fmt:formatNumber value="${item.produit.prixEffectif * item.quantite}" type="currency" currencySymbol="EUR " /></strong>
+                        <strong class="text-white"><fmt:formatNumber value="${item.produit.prixEffectif * item.quantite}" type="currency" currencySymbol="MAD " /></strong>
                     </div>
                 </c:forEach>
                 <div class="flex items-center justify-between py-3 text-slate-300"><span>Frais de livraison</span><strong class="text-white">Gratuit</strong></div>
-                <div class="flex items-center justify-between py-3 text-slate-300"><span>Total</span><strong class="text-2xl font-black text-cyanx"><fmt:formatNumber value="${panier.total}" type="currency" currencySymbol="EUR " /></strong></div>
+                <div class="flex items-center justify-between py-3 text-slate-300"><span>Total</span><strong class="text-2xl font-black text-cyanx"><fmt:formatNumber value="${panier.total}" type="currency" currencySymbol="MAD " /></strong></div>
             </div>
         </aside>
     </div>
