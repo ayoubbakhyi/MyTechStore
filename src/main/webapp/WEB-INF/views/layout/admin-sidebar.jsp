@@ -8,6 +8,7 @@
         <li><a class="inline-flex min-h-9 items-center rounded-md border border-line px-3 py-2 text-sm font-bold text-slate-300 hover:border-cyanx hover:text-cyanx" href="${ctx}/admin/commandes">Commandes</a></li>
         <li><a class="inline-flex min-h-9 items-center rounded-md border border-line px-3 py-2 text-sm font-bold text-slate-300 hover:border-cyanx hover:text-cyanx" href="${ctx}/admin/livraisons">Livraisons</a></li>
         <li><a class="inline-flex min-h-9 items-center rounded-md border border-line px-3 py-2 text-sm font-bold text-slate-300 hover:border-cyanx hover:text-cyanx" href="${ctx}/admin/promotions">Promotions</a></li>
+        <li><a class="inline-flex min-h-9 items-center rounded-md border border-line px-3 py-2 text-sm font-bold text-slate-300 hover:border-cyanx hover:text-cyanx" href="${ctx}/admin/utilisateurs">Utilisateurs</a></li>
         <li><a class="inline-flex min-h-9 items-center rounded-md border border-line px-3 py-2 text-sm font-bold text-slate-300 hover:border-cyanx hover:text-cyanx" href="${ctx}/catalogue">Voir le store</a></li>
     </ul>
 </aside>
