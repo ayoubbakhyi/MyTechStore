@@ -25,8 +25,9 @@ public class AppListener implements ServletContextListener {
                 System.out.println("Successfully connected to MySQL database: " + conn.getMetaData().getURL());
             }
         } catch (SQLException e) {
-            System.err.println("CRITICAL ERROR: Failed to connect to MySQL database during startup.");
-            e.printStackTrace();
+            System.err.println("WARNING: Could not connect to MySQL database.");
+            System.err.println("Application will run in limited mode without database functionality.");
+            System.err.println("Error: " + e.getMessage());
         }
         System.out.println("==================================================");
     }

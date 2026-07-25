@@ -5,10 +5,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/mytechstore?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
-    private static final String USER = "root";
-    private static final String PASSWORD = "test";
-    
+
+    private static final String DB_HOST = System.getenv().getOrDefault("DB_HOST", "127.0.0.1");
+    private static final String DB_NAME = System.getenv().getOrDefault("DB_NAME", "mytechstore");
+    private static final String USER = System.getenv().getOrDefault("DB_USER", "root");
+    private static final String PASSWORD = System.getenv().getOrDefault("DB_PASSWORD", "test");
+
+    private static final String URL = "jdbc:mysql://" + DB_HOST + ":3306/" + DB_NAME
+            + "?allowMultiQueries=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+
     private static Connection connection = null;
 
     static {
