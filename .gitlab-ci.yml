@@ -15,7 +15,7 @@ build:
     paths:
       - target/*war
     expire_in: 1 hour
-package:
+build-image:
   stage: package
   image: docker:latest
   services:
