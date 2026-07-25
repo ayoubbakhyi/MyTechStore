@@ -25,6 +25,6 @@ build-image:
     - docker build -t $IMAGE_TAG .
     - docker push $IMAGE_TAG
   needs:
-    - package
+    - build
   only:
     - main
